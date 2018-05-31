@@ -33,7 +33,7 @@
 
                         <h4 class="title">Startgeneration</h4>
 
-                        <a class="load-preset button is-dark" @click="loadPreset('random')">Zufällig</a>
+                        <a class="load-preset button is-outlined is-link" @click="loadPreset('random')">Zufällig</a>
 
                         <span v-if="! this.advancedOptions">
                             <a class="load-preset button" @click="loadPreset('still-life')">still-life</a>
@@ -90,12 +90,10 @@
 <script>
 
     import { EventBus } from './support/EventBus';
+    import { enableFullscreen } from "./support/Helpers";
 
     import GameOfLife from './components/GameOfLife'
     import InstructionModal from './components/InstructionModal';
-    import GameOfLifeRefactored from './components/GameOfLifeRefactored.vue'
-
-    import { enableFullscreen } from "./support/Helpers";
 
     export default {
 
@@ -124,7 +122,7 @@
             }, 5000);
         },
 
-        components: { GameOfLife, GameOfLifeRefactored, InstructionModal },
+        components: { GameOfLife, InstructionModal },
 
     }
 </script>

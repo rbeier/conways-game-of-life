@@ -3,7 +3,6 @@
     import { cloneDeep } from 'lodash';
     import { EventBus } from '../support/EventBus';
     import { Matchfield } from "../support/Matchfield";
-    import { bindKeyboardEventListener } from "../support/Helpers";
 
     import { DEAD } from "../support/Cell";
     import { ALIVE } from "../support/Cell";
@@ -25,7 +24,6 @@
                 livingCells: 0,
                 maxLeft: 0,
                 maxTop: 0,
-                timer: null,
                 matchfieldLimited: false,
                 advancedOptions: false,
                 generationCount: 0,
@@ -98,28 +96,26 @@
                     return false;
                 }
 
-//                this.resetGame();
-
                 // reset some values
-                this.livingCells = 0;
                 this.generationCount = 0;
 
                 // pause the game and clear the matchfield
                 this.resetGame();
-                this.buildMatchfield();
 
                 if(limitMatchfield) {
                     this.matchfieldLimited = true;
                 }
 
-                if( preset == 'random' ) {
-                    // generate a random value from 0 to 100
-                    this.livingCells = Math.random() * (100 - 0);
-                } else {
-                    // load the preset via axios
-                    new Matchfield().loadPreset(preset, this.matchfield);
-                }
-
+                // our rebuilding takes some ms, we will wait for it
+                setTimeout(() => {
+                    if( preset == 'random' ) {
+                        // generate a random value from 0 to 100
+                        this.livingCells = Math.random() * (100 - 0);
+                    } else {
+                        // load the preset via axios
+                        new Matchfield().loadPreset(preset, this.matchfield);
+                    }
+                }, 50)
             },
 
             /**
@@ -185,9 +181,6 @@
 
             // initially build our matchfield
             this.buildMatchfield();
-
-            // add keyboard event listener
-            bindKeyboardEventListener();
 
             // EventBus-Listener
             EventBus.$on('change-option', (payload) => {

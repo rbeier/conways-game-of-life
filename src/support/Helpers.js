@@ -1,5 +1,3 @@
-
-
 /**
  * enable fullscreen on different browsers
  */
@@ -15,27 +13,6 @@ export function enableFullscreen() {
         element.webkitRequestFullscreen();
     } else if(element.msRequestFullscreen) {
         element.msRequestFullscreen();
-    }
-
-}
-
-export function bindKeyboardEventListener() {
-
-    console.log("evt. listener");
-
-    window.onkeyup = e => {
-        let key = e.keyCode ? e.keyCode : e.which;
-
-        if (key == 32) {
-            if( this.timer ) {
-                this.pause();
-            } else {
-                this.play();
-            }
-        } else if (key == 78) {
-            this.pause();
-            this.nextRound();
-        }
     }
 
 }
