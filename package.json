@@ -10,7 +10,7 @@
     "start": "node node_modules/http-server/bin/http-server dist/"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "bulma": "^0.7.2",
     "bulma-slider": "0.0.2",
     "http-server": "^0.10.0",
